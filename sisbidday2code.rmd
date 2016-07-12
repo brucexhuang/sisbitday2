@@ -3,6 +3,26 @@ title: "sisbidday2"
 output: html_document
 ---
 
+
+installing google sheets
+```{r}
+install.packages("googlesheets")
+library(googlesheets)
+```
+
+read the google 
+```{r}
+sheets_url = "https://docs.google.com/spreadsheets/d/18KQQd4LY5k8Ucux1MvWCsQGQJlvd0ECTnn-3ixdOKFM/pubhtml"
+gsurl1 = gs_url(sheets_url)
+dat = gs_read(gsurl1)
+data_accessed = date()
+```
+
+look at the result
+```{r}
+
+
+
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
