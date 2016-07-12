@@ -34,10 +34,10 @@ library(jsonlite)
 ```
 
 ```{r}
-github_url = "https://api.github.com/users/jtleek/repos"
+github_url = "https://github.com/hadley"
 jsonData <- fromJSON(github_url)
-dim(jsonData)
-jsonData$owner$html_url
+jsonData
+jsonData$stargazers_count
 ```
 
 exploring data frame
@@ -45,39 +45,6 @@ exploring data frame
 sapply(jsonData,class)
 table(sapply(jsonData,class))
 ```
-
-```{r}
-install.packages("rvest")
-library(rvest)
-```
-```{r}
-recount_url = "http://bowtie-bio.sourceforge.net/recount/"
-nds = html_nodes(htmlfile,                
-xpath='//*[@id="recounttab"]/table')
-dat = html_table(nds)
-dat = as.data.frame(dat)
-head(dat)
-colonames(dat) = dat[1,]
-```
-
-##APIs
-
-load the figshare package
-```{r}
-install.packages("rfigshare")
-library(rfigshare)
-```
-
-search jeff
-
-install httr
-```{r}
-install.packages("httr")
-library(httr)
-```
-
-
-
 
 
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.

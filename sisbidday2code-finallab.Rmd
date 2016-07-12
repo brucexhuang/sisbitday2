@@ -1,49 +1,9 @@
 ---
-title: "sisbidday2"
+title: "sisbidday2-finallab"
 output: html_document
 ---
 
 
-installing google sheets
-```{r}
-install.packages("googlesheets")
-library(googlesheets)
-```
-
-read the google 
-```{r}
-sheets_url = "https://docs.google.com/spreadsheets/d/18KQQd4LY5k8Ucux1MvWCsQGQJlvd0ECTnn-3ixdOKFM/pubhtml"
-gsurl1 = gs_url(sheets_url)
-dat = gs_read(gsurl1)
-data_accessed = date()
-```
-
-look at the result
-```{r}
-cell_rows(dat)
-```
-
-
-##doing Json
-
-install stuff
-
-```{r}
-install.packages("jsonlite")
-library(jsonlite)
-```
-
-```{r}
-github_url = "https://api.github.com/users/jtleek/repos"
-jsonData <- fromJSON(github_url)
-dim(jsonData)
-jsonData$owner$html_url
-```
-
-exploring data frame
-```{r}
-sapply(jsonData,class)
-table(sapply(jsonData,class))
 ```
 
 ```{r}
@@ -51,13 +11,17 @@ install.packages("rvest")
 library(rvest)
 ```
 ```{r}
-recount_url = "http://bowtie-bio.sourceforge.net/recount/"
+bioc_url = "https://raw.githubusercontent.com/SISBID/Module1/gh-pages/labs/bioc-software.html"
+htmlfile = read_html(bioc_url)
 nds = html_nodes(htmlfile,                
-xpath='//*[@id="recounttab"]/table')
+xpath='//*[@id="biocViews_package_table"]')
 dat = html_table(nds)
 dat = as.data.frame(dat)
-head(dat)
-colonames(dat) = dat[1,]
+text = paste(dat[,3], collapse=" ")
+
+install.packages(c("wordcloud","tm"))
+library("wordcloud")
+wordcloud(text,max.words=50)
 ```
 
 ##APIs
@@ -74,6 +38,13 @@ install httr
 ```{r}
 install.packages("httr")
 library(httr)
+```
+
+GET DATA
+```{r}
+query_url = "https://api.github.com/search/repositories?q=created:2014-08-13+language:r+-user:cran"
+
+req = GET(query_url)
 ```
 
 
